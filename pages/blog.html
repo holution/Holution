@@ -1,1 +1,534 @@
-<h1>Coming Soon</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Holution Blog — Coming Soon">
+    <title>Blog — Holution</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+    <style>
+        /* =============================================
+           BLOG — Coming Soon Page
+           ============================================= */
+
+        :root {
+            --bg: #000000;
+            --text: #ffffff;
+            --text-muted: #555555;
+            --accent: #ffffff;
+            --font: 'Inter', -apple-system, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ---- Noise grain overlay ---- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        /* ---- Nav ---- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.2s forwards;
+        }
+
+        .nav-back {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.3s;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.4s forwards;
+        }
+
+        .nav-back:hover {
+            color: #fff;
+        }
+
+        .nav-back span {
+            font-size: 1rem;
+        }
+
+        /* ---- Main Content ---- */
+        main {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* ---- Glitchy Grid Lines ---- */
+        .grid-lines {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+        }
+
+        /* ---- Coming Soon Text ---- */
+        .coming-soon-wrapper {
+            text-align: center;
+            position: relative;
+        }
+
+        .eyebrow {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: #444;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.5s forwards;
+        }
+
+        .coming-soon-title {
+            font-size: clamp(3.5rem, 10vw, 9rem);
+            font-weight: 600;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            opacity: 0;
+            animation: fadeUp 1s var(--ease) 0.3s forwards;
+            position: relative;
+        }
+
+        /* Glitch effect on hover */
+        .coming-soon-title .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .coming-soon-title .glitch::before,
+        .coming-soon-title .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .coming-soon-title .glitch::before {
+            color: #000000;
+            clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+            animation: glitch-1 4s infinite;
+            opacity: 0.5;
+        }
+
+        .coming-soon-title .glitch::after {
+            color: #000000;
+            clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
+            animation: glitch-2 4s infinite;
+            opacity: 0.4;
+        }
+
+        .subtitle {
+            margin-top: 2.5rem;
+            font-size: 0.85rem;
+            color: #444;
+            letter-spacing: 0.05em;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease) 0.7s forwards;
+        }
+
+        /* ---- Scanline on bottom ---- */
+        .scanline {
+            position: fixed;
+            bottom: 3rem;
+            left: 5%;
+            right: 5%;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.06);
+            z-index: 1;
+        }
+
+        .footer-bar {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 5%;
+            right: 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: #333;
+            letter-spacing: 0.1em;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* ---- Cursor Character (Pixel Robot) ---- */
+        #cursor-char {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -120%);
+            transition: transform 0.05s linear;
+            will-change: left, top;
+        }
+
+        /* Canvas for cursor trail */
+        #trail-canvas {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ---- Keyframes ---- */
+        :root {
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glitch-1 {
+
+            0%,
+            90%,
+            100% {
+                transform: translate(0);
+            }
+
+            92% {
+                transform: translate(-3px, 1px);
+            }
+
+            94% {
+                transform: translate(3px, -1px);
+            }
+
+            96% {
+                transform: translate(-2px, 2px);
+            }
+
+            98% {
+                transform: translate(2px, -2px);
+            }
+        }
+
+        @keyframes glitch-2 {
+
+            0%,
+            85%,
+            100% {
+                transform: translate(0);
+            }
+
+            87% {
+                transform: translate(3px, -2px);
+            }
+
+            89% {
+                transform: translate(-3px, 2px);
+            }
+
+            91% {
+                transform: translate(2px, 1px);
+            }
+
+            93% {
+                transform: translate(-2px, -1px);
+            }
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: translate(-50%, -120%) translateY(0px);
+            }
+
+            50% {
+                transform: translate(-50%, -120%) translateY(-6px);
+            }
+        }
+
+        @keyframes eye-blink {
+
+            0%,
+            90%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            95% {
+                transform: scaleY(0.1);
+            }
+        }
+
+        .char-idle {
+            animation: bob 1.8s ease-in-out infinite;
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 600px) {
+            .coming-soon-title {
+                font-size: clamp(2.5rem, 16vw, 5rem);
+            }
+
+            #cursor-char {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Grid background -->
+    <div class="grid-lines"></div>
+
+    <!-- Cursor trail canvas -->
+    <canvas id="trail-canvas"></canvas>
+
+    <!-- Cursor character (pixel robot SVG) -->
+    <div id="cursor-char" class="char-idle">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Antenna -->
+            <rect x="22" y="2" width="4" height="6" fill="white" />
+            <rect x="20" y="1" width="8" height="3" fill="white" />
+            <rect x="23" y="0" width="2" height="2" fill="#00ffcc" />
+            <!-- Head -->
+            <rect x="10" y="8" width="28" height="20" rx="3" fill="white" />
+            <!-- Eyes -->
+            <g id="left-eye" style="animation: eye-blink 3s ease-in-out infinite;">
+                <rect x="15" y="14" width="8" height="8" rx="1" fill="black" />
+                <rect x="17" y="16" width="3" height="3" fill="#00ffcc" />
+                <rect x="18" y="17" width="1" height="1" fill="white" />
+            </g>
+            <g id="right-eye" style="animation: eye-blink 3s ease-in-out 0.1s infinite;">
+                <rect x="25" y="14" width="8" height="8" rx="1" fill="black" />
+                <rect x="27" y="16" width="3" height="3" fill="#00ffcc" />
+                <rect x="28" y="17" width="1" height="1" fill="white" />
+            </g>
+            <!-- Mouth -->
+            <rect x="17" y="24" width="14" height="2" rx="1" fill="black" />
+            <rect x="17" y="24" width="2" height="2" fill="#444" />
+            <rect x="21" y="24" width="2" height="2" fill="#444" />
+            <rect x="25" y="24" width="2" height="2" fill="#444" />
+            <!-- Body -->
+            <rect x="14" y="29" width="20" height="14" rx="2" fill="white" />
+            <!-- Body details -->
+            <rect x="18" y="32" width="12" height="2" rx="1" fill="#ddd" />
+            <rect x="20" y="36" width="8" height="2" rx="1" fill="#ccc" />
+            <rect x="17" y="32" width="3" height="5" rx="1" fill="#00ffcc" opacity="0.6" />
+            <!-- Arms -->
+            <rect x="6" y="30" width="8" height="5" rx="2" fill="white" />
+            <rect x="34" y="30" width="8" height="5" rx="2" fill="white" />
+            <!-- Hands -->
+            <rect x="4" y="34" width="5" height="4" rx="2" fill="white" />
+            <rect x="39" y="34" width="5" height="4" rx="2" fill="white" />
+            <!-- Legs -->
+            <rect x="17" y="43" width="6" height="4" rx="1" fill="white" />
+            <rect x="25" y="43" width="6" height="4" rx="1" fill="white" />
+        </svg>
+    </div>
+
+    <!-- Nav -->
+    <nav>
+        <a href="../index.html" class="nav-logo">Holution.</a>
+        <a href="../index.html" class="nav-back">
+            <span>←</span> Back to Home
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="coming-soon-wrapper">
+            <p class="eyebrow">Holution / Blog</p>
+            <h1 class="coming-soon-title">
+                <span class="glitch" data-text="Coming">Coming</span><br>
+                <span class="glitch" data-text="Soon.">Soon.</span>
+            </h1>
+            <p class="subtitle">Something is being crafted. Stay tuned.</p>
+        </div>
+    </main>
+
+    <!-- Footer decorations -->
+    <div class="scanline"></div>
+    <div class="footer-bar">
+        <span>BLOG_v1.0</span>
+        <span id="live-time">--:--:--</span>
+        <span>STATUS: LOADING</span>
+    </div>
+
+    <script>
+        // ---- Live Clock ----
+        function updateClock() {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('live-time').textContent = `${h}:${m}:${s}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // ---- Cursor Following Character ----
+        const char = document.getElementById('cursor-char');
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+        let currentX = targetX;
+        let currentY = targetY;
+        let velX = 0, velY = 0;
+        let isMoving = false;
+        let idleTimer = null;
+
+        document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            isMoving = true;
+            char.classList.remove('char-idle');
+            clearTimeout(idleTimer);
+            idleTimer = setTimeout(() => {
+                isMoving = false;
+                char.classList.add('char-idle');
+            }, 600);
+        });
+
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        function animateChar() {
+            // Smooth follow with spring-like easing
+            currentX = lerp(currentX, targetX, 0.08);
+            currentY = lerp(currentY, targetY, 0.08);
+
+            char.style.left = currentX + 'px';
+            char.style.top = currentY + 'px';
+
+            requestAnimationFrame(animateChar);
+        }
+        animateChar();
+
+        // ---- Cursor Trail Canvas ----
+        const canvas = document.getElementById('trail-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+
+        document.addEventListener('mousemove', (e) => {
+            for (let i = 0; i < 2; i++) {
+                particles.push({
+                    x: e.clientX + (Math.random() - 0.5) * 6,
+                    y: e.clientY + (Math.random() - 0.5) * 6,
+                    size: Math.random() * 3 + 1,
+                    alpha: 0.6,
+                    vx: (Math.random() - 0.5) * 1.5,
+                    vy: (Math.random() - 0.5) * 1.5 - 0.5,
+                    color: Math.random() > 0.7 ? '#00ffcc' : '#ffffff',
+                });
+            }
+        });
+
+        function drawTrail() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+                const p = particles[i];
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.025;
+                p.size *= 0.97;
+
+                if (p.alpha <= 0 || p.size < 0.2) {
+                    particles.splice(i, 1);
+                    continue;
+                }
+
+                ctx.save();
+                ctx.globalAlpha = p.alpha;
+                ctx.fillStyle = p.color;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+
+            requestAnimationFrame(drawTrail);
+        }
+        drawTrail();
+
+        // ---- Hide default cursor ----
+        document.body.style.cursor = 'none';
+    </script>
+
+</body>
+
+</html>
